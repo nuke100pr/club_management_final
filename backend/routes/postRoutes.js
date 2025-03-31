@@ -32,4 +32,13 @@ router.delete('/posts/:id/like',postController.unlikePost);
 // Delete a post
 router.delete('/posts/:id',  postController.deletePost);
 
+router.post('/api/posts/:id/reactions', postController.addReaction);
+router.delete('/api/posts/:id/reactions', postController.removeReaction);
+router.get('/api/posts/:id/reactions', postController.getReactions);
+
+// Vote routes
+router.post('/api/posts/:id/votes', postController.addVote);
+router.delete('/api/posts/:id/votes', postController.removeVote);
+router.get('/api/posts/:id/votes', postController.getVotes);
+
 module.exports = router;

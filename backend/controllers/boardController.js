@@ -16,6 +16,9 @@ class BoardController {
     try {
       const { board_id } = req.params;
       const board = await boardService.fetchBoardById(board_id);
+      if (!board) {
+        return res.status(404).json({ error: 'Board not found' });
+      }
       res.status(200).json(board);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -49,7 +52,18 @@ class BoardController {
     try {
       const { board_id } = req.params;
       const updateData = req.body;
-      const updatedBoard = await boardService.editBoardById(board_id, updateData);
+      const imageFile = req.file; // Get uploaded file from multer
+      
+      const updatedBoard = await boardService.editBoardById(
+        board_id, 
+        updateData, 
+        imageFile
+      );
+      
+      if (!updatedBoard) {
+        return res.status(404).json({ error: 'Board not found' });
+      }
+      
       res.status(200).json(updatedBoard);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -60,7 +74,9 @@ class BoardController {
   async createBoard(req, res) {
     try {
       const boardData = req.body;
-      const newBoard = await boardService.createBoard(boardData);
+      const imageFile = req.file; // Get uploaded file from multer
+      
+      const newBoard = await boardService.createBoard(boardData, imageFile);
       res.status(201).json(newBoard);
     } catch (error) {
       res.status(500).json({ error: error.message });

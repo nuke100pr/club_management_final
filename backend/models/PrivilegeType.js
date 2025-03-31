@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const privilegeTypeSchema = new mongoose.Schema({
-  _id: { type: String, required: true },
-  title: { type: String, required: true },
+  position: { type: String, required: true },
+  description:{ type: String, required: true },
   posts: { type: Boolean, required: true },
   events: { type: Boolean, required: true },
   projects: { type: Boolean, required: true },

@@ -5,13 +5,12 @@ const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // Public routes
+router.post('/users', userController.createUser);  // New route for user creation
 router.get('/users', userController.fetchAllUsers);
 router.get('/users/club/:club_id', userController.fetchUsersByClubId);
 router.get('/users/:user_id/details', userController.fetchUserDetails);
 
-// Protected routes (require authentication)
-router.use(authMiddleware);
-
+// Protected routes (if needed in future)
 router.delete('/users/:id', userController.deleteUser);
 router.put('/users/:id', userController.editUser);
 router.put('/users/:user_id/details', userController.editUserDetails);

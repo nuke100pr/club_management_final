@@ -4,6 +4,12 @@ const ClubFollow = require('../models/ClubFollow');
 const PostLikes = require('../models/PostLikes');
 
 class UserService {
+  // Create a new user
+  async createUser(userData) {
+    const user = new User(userData);
+    return await user.save();
+  }
+
   // Delete user by ID
   async deleteUserById(userId) {
     // Delete user details first

@@ -1,6 +1,17 @@
 const userService = require('../services/userService');
 
 class UserController {
+  // Create a new user
+  async createUser(req, res) {
+    try {
+      const userData = req.body;
+      const newUser = await userService.createUser(userData);
+      res.status(201).json(newUser);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   // Delete user by ID
   async deleteUser(req, res) {
     try {
